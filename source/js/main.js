@@ -15,6 +15,10 @@ angular.module('mf', [uiRouter, ngAnimate, ngSanitize])
     'API',
     require('./services/api-service')
   )
+  .service(
+    'PubSub',
+    require('./services/pubsub-service')
+  )
   .config(require('./config'))
 
   .run(['$rootScope', '$state', '$stateParams', '$window', '$location', function($rootScope, $state, $stateParams, $window, $location) {

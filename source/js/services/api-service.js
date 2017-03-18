@@ -15,11 +15,16 @@ mf.services = mf.services || {};
 /**
  * API Service
  * @param {!angular.$http} $http Angular $http Module.
+ * @param {!angular.$sce} $sce Angular $sce Module.
+ * @param {mf.services.PubSub} PubSub service.
  * @constructor
  * @ngInject
  */
-mf.services.API = function($http) {
+mf.services.API = function($http, $sce, PubSub) {
   this.$http = $http;
+  this.$sce = $sce;
+  this.PubSub = PubSub;
+  this.token = null;
 };
 
 
@@ -28,12 +33,25 @@ mf.services.API = function($http) {
  */
 module.exports = mf.services.API;
 
+
+/**
+ * PubSub callback - get token in message
+ * @param {String=} message PubSub publish message
+ * @return {object}
+ */
+mf.services.API.prototype.getAccessToken = function(message) {
+  if (message.token) {
+    this.token = message.token;
+  }
+  return this.token;
+};
+
+
 /**
  * Gets documents based on access levels
  * @return {object}
  */
-mf.services.API.prototype.getInstagramPhotos = function() {
-  var access_token = this.getAccessToken();
-  return this.$http.get('https://api.instagram.com/v1/tags/nofilter/media/recent?access_token=ACCESS_TOKEN');
+mf.services.API.prototype.getInstagramPhotos = function(token) {
+  return this.$http.jsonp(this.$sce.trustAsResourceUrl('https://api.instagram.com/v1/users/self/?access_token=' + token), {jsonpCallbackParam: 'callback'});
   // return this.$http.get('/api/v1/files/folders/');
 };
