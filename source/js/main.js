@@ -7,10 +7,10 @@ var ngSanitize = require('angular-sanitize');
 
 /** @ngInject */
 angular.module('mf', [uiRouter, ngAnimate, ngSanitize])
-  // .controller(
-  //   'MainController',
-  //   require('./controllers/main-controller')
-  // )
+  .controller(
+    'UserController',
+    require('./controllers/user-controller')
+  )
   .service(
     'API',
     require('./services/api-service')

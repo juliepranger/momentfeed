@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <base href="/">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="initial-scale=1, minimum-scale=1, width=device-width">
@@ -17,13 +18,14 @@
     <!--[if lte IE 9]>
         <p id="whatbrowser" class="whatbrowser">You are using an <strong>outdated</strong> browser. Please <a href="http://whatbrowser.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <div class="container">
+    <div class="container" ng-controller="UserController as UserController">
       <div class="row">
         <h1>Momentfeed</h1>
+        <button class="btn btn-default" ng-click="UserController.getUser()">Sign in to Instagram</button>
       </div>
     </div>
-<!--
-    <script src="//www.google-analytics.com/analytics.js"></script>
-    <script src="{{g.static('/dist/js/main.min.js').url.path}}"></script> -->
+
+<!--    <script src="//www.google-analytics.com/analytics.js"></script> -->
+    <script src="./dist/js/main.js"></script>
   </body>
 </html>

@@ -32,6 +32,8 @@ module.exports = mf.services.API;
  * Gets documents based on access levels
  * @return {object}
  */
-mf.services.API.prototype.getFolders = function() {
+mf.services.API.prototype.getInstagramPhotos = function() {
+  var access_token = this.getAccessToken();
+  return this.$http.get('https://api.instagram.com/v1/tags/nofilter/media/recent?access_token=ACCESS_TOKEN');
   // return this.$http.get('/api/v1/files/folders/');
 };
