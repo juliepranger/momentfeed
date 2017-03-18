@@ -11,6 +11,10 @@ angular.module('mf', [uiRouter, ngAnimate, ngSanitize])
     'UserController',
     require('./controllers/user-controller')
   )
+  .directive(
+    'imagemodal',
+    require('./directives/imagemodal-directive')
+  )
   .service(
     'API',
     require('./services/api-service')
@@ -22,13 +26,5 @@ angular.module('mf', [uiRouter, ngAnimate, ngSanitize])
   .config(require('./config'))
 
   .run(['$rootScope', '$state', '$stateParams', '$window', '$location', function($rootScope, $state, $stateParams, $window, $location) {
-
-    $rootScope.$on('$stateChangeStart', function(event, toState, fromState) {
-      $rootScope.loading = true;
-    }.bind(this));
-
-    $rootScope.$on('$stateChangeSuccess', function(event, toState, fromState) {
-      $rootScope.loading = false;
-    }.bind(this));
   }]);
 angular.bootstrap(document, ['mf']);

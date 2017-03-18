@@ -29,6 +29,7 @@ mf.controllers.UserController =
   this.API = API;
   this.clientID_ =  'dcd6712d07b04d0aa6e34c1a032dd89d';
   this.accessToken = null;
+  this.loading = true;
   this.images;
 
   this.initialize();
@@ -79,7 +80,8 @@ mf.controllers.UserController.prototype.parseAccessToken = function(value) {
 
   // get the photos!
   this.API.getInstagramPhotos(this.accessToken).then(function(response) {
-    console.log(response);
     this.images = response.data.data;
+    // page content ready to display
+    this.loading = false;
   }.bind(this))
 };

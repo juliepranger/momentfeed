@@ -6,26 +6,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="initial-scale=1, minimum-scale=1, width=device-width">
     <meta name="description" content="momentfeed-technical-interview">
-    <title>Momentfeed Technical Interview</title>
+    <title>Momentfeed Technical Interview - Julie Pranger</title>
 
     <link rel="icon" href="">
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" type="text/css">
     <link rel="stylesheet" href="./dist/css/main.min.css"/>
   </head>
-  <body>
+  <body ng-controller="UserController as UserController" ng-show="!UserController.loading" ng-cloak>
 
     <!--[if lte IE 9]>
         <p id="whatbrowser" class="whatbrowser">You are using an <strong>outdated</strong> browser. Please <a href="http://whatbrowser.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <div class="container" ng-controller="UserController as UserController">
+    <div class="container">
+      <h1 class="text-center">Momentfeed - Julie Pranger</h1>
+      <button class="btn btn-default center-block"
+        ng-click="UserController.getUser()"
+        ng-show="UserController.accessToken === null">Sign in to Instagram
+      </button>
       <div class="row">
-        <h1>Momentfeed</h1>
-        <button class="btn btn-default" ng-click="UserController.getUser()">Sign in to Instagram</button>
-      </div>
-      <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-3 image-container" ng-repeat="image in UserController.images">
-          <img class="center-block" src="{[image.images.standard_resolution.url]}"/>
+        <div class="col-xs-12 col-sm-6 col-md-3" ng-repeat="image in UserController.images">
+          <img class="col-xs-12 col-sm-12 col-md-12 image-container"
+            ng-src="{[image.images.standard_resolution.url]}"
+            imagemodal/>
+          <div class="col-xs-12 col-sm-12 col-md-12 image-container popup">
+
+          </div>
         </div>
       </div>
     </div>
