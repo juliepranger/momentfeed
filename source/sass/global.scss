@@ -16,7 +16,13 @@
       background-color: #000;
       pointer-events: none;
       max-width: 345px;
+      overflow: hidden;
       @include prefix(transition, height 250ms ease-in-out);
+
+      p {
+        color: #fff;
+        padding: 15px;
+      }
     }
   }
   .image-container.active {
