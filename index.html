@@ -23,6 +23,11 @@
         <h1>Momentfeed</h1>
         <button class="btn btn-default" ng-click="UserController.getUser()">Sign in to Instagram</button>
       </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-3 image-container" ng-repeat="image in UserController.images">
+          <img class="center-block" src="{[image.images.standard_resolution.url]}"/>
+        </div>
+      </div>
     </div>
 
 <!--    <script src="//www.google-analytics.com/analytics.js"></script> -->
