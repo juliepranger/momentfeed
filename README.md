@@ -1,5 +1,5 @@
 # meet me
-Hey there! This is a little Angular application I made to allow people a chance to get to know me via my Instagram feed. Due to the updates to the Instagram API (since I played with it last), this will be a Sandbox-mode app, and as such, is far more limited in scope than if this was a production-ready and approved by Instagram.
+Hey there! This is a little Angular application I made to allow people a chance to get to know me via my Instagram feed. Due to the updates to the Instagram API (since I played with it last), this will be a Sandbox-mode app, and as such, is far more limited in scope than if this was a production-ready app approved by Instagram.
 
 This project assumes you have npm, gulp, and python ready to go on your local machine. If you do not, please install those first.
 
