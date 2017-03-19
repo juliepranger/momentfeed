@@ -13,7 +13,7 @@ mf.directives = mf.directives || {};
 
 
 /**
- * Directive used for handling multiple checkboxes in a form.
+ * Directive used for handling hover effects over instagram 'cards'.
  * Reports to the FormboxForm.
  * @constructor
  * @ngInject

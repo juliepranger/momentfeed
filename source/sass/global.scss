@@ -1,14 +1,21 @@
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+///
+/// BODY OF THE APPLICATION
+///
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
 body {
-  background-color: black;
+  background: $black;
 }
 
 h1 {
-  color: white;
+  color: $white;
   margin: 40px auto;
 }
 
 .sentence-animate {
-  color: #fff;
+  color: $white;
   font-size: 21px;
   line-height: 29px;
 
@@ -21,7 +28,7 @@ h1 {
 .row {
 
   .col-md-3 {
-    padding: 0 !important;
+    padding: 0;
   }
 
   .image-container {
@@ -39,31 +46,23 @@ h1 {
       position: absolute;
       background-color: #000;
       pointer-events: none;
-      max-width: 345px;
       overflow: hidden;
       opacity: 0.9;
       @include prefix(transition, height 250ms ease-in-out);
 
       p {
-        color: #fff;
+        color: $white;
         padding: 15px;
       }
     }
   }
+
   .image-container.active {
     & + .popup {
       height: 100px;
     }
   }
 }
-
-@media screen and (max-width: 768px) {
-  .row {
-    .image-container {
-    }
-  }
-}
-
 
 /*
   Allow angular.js to be loaded in body, hiding cloaked elements until

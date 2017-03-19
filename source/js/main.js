@@ -8,8 +8,8 @@ var ngSanitize = require('angular-sanitize');
 /** @ngInject */
 angular.module('mf', [uiRouter, ngAnimate, ngSanitize])
   .controller(
-    'UserController',
-    require('./controllers/user-controller')
+    'MainController',
+    require('./controllers/main-controller')
   )
   .directive(
     'imagemodal',
@@ -18,14 +18,6 @@ angular.module('mf', [uiRouter, ngAnimate, ngSanitize])
   .service(
     'API',
     require('./services/api-service')
-  )
-  .service(
-    'PubSub',
-    require('./services/pubsub-service')
-  )
-  .service(
-    'Preloader',
-    require('./services/preloader-service')
   )
   .config(require('./config'))
 

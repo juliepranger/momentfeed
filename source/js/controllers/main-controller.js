@@ -6,39 +6,37 @@
 var mf = mf || {};
 
 /**
- * JibeDocs.controllers namespace
+ * mf.controllers namespace
  */
 mf.controllers = mf.controllers || {};
 
 
 
 /**
- * User controller.
+ * Main Controller handling application flow and gathering API data.
  * @param {!angular.$scope} $scope module.
  * @param {!angular.$window} $window module.
  * @param {!angular.$location} $location module.
  * @param {!angular.$timeout} $timeout module.
  * @param {mf.services.API} API service.
- * @param {mf.services.Preloader} Preloader service.
  * @constructor
  * @ngInject
  **/
-mf.controllers.UserController =
-    function($scope, $window, $location, $timeout, API, Preloader) {
+mf.controllers.MainController =
+    function($scope, $window, $location, $timeout, API) {
   this.$scope = $scope;
   this.$window = $window;
   this.$location = $location;
   this.$timeout = $timeout;
-  this.Preloader = Preloader;
   this.API = API;
+  // would normally be handled server-side, this will have to do for this exercise.
   this.clientID_ =  'dcd6712d07b04d0aa6e34c1a032dd89d';
   this.accessToken = null;
   this.images;
+  this.loggedIn = false;
   this.loadIntroSequence = false;
   this.loadImageSequence = false;
-  this.goOne = false;
-  this.goTwo = false;
-  this.goThree = false;
+  // initialize the controller.
   this.initialize();
 };
 
@@ -46,13 +44,14 @@ mf.controllers.UserController =
 /**
  * class exports
  */
-module.exports = mf.controllers.UserController;
+module.exports = mf.controllers.MainController;
 
 
 /**
- * Initialize the watchers
+ * Watch + look for access token in URL
+ * When user is "logged in" + we have access token, begin the intro sequence.
  */
-mf.controllers.UserController.prototype.initialize = function() {
+mf.controllers.MainController.prototype.initialize = function() {
 
   // watch the URL
   this.$scope.$watch(function(){
@@ -61,19 +60,20 @@ mf.controllers.UserController.prototype.initialize = function() {
     // if the access token is in the URL, great! Let's parse that.
     if (value.indexOf('#access_token') > -1) {
       this.parseAccessToken(value);
+
+      this.$timeout(function() {
+        this.loadIntroSequence = true;
+        this.isLoggedIn = true;
+      }.bind(this), 2000);
     }
   }.bind(this));
-
-  this.$timeout(function() {
-    this.loadIntroSequence = true;
-  }.bind(this), 2000);
 };
 
 
 /**
  * User signs in via Oauth/Instagram API
  */
-mf.controllers.UserController.prototype.getUser = function() {
+mf.controllers.MainController.prototype.getUser = function() {
   // setup redirect URL for Oauth
   this.$window.location.href=
       'https://api.instagram.com/oauth/authorize/?client_id=' +
@@ -86,11 +86,12 @@ mf.controllers.UserController.prototype.getUser = function() {
 /**
  * User access token exists, parse from URL and store.
  */
-mf.controllers.UserController.prototype.parseAccessToken = function(value) {
+mf.controllers.MainController.prototype.parseAccessToken = function(value) {
   // parse unnecessary bits, get the access token
   this.accessToken = value.replace('/#access_token=','');
 
   // get the photos!
+  // @TODO store the access token on the backend, not insecurely here.
   this.API.getInstagramPhotos(this.accessToken).then(function(response) {
     this.images = response.data.data;
     var imageArray = [];
@@ -101,12 +102,10 @@ mf.controllers.UserController.prototype.parseAccessToken = function(value) {
     }
 
     // Preload the images; then, update display when returned.
-    this.Preloader.preloadImages( imageArray ).then(function(response) {
-      this.$timeout(function() {
-        // page content ready to display
-        this.loadIntroSequence = false;
-        this.loadImageSequence = true;
-      }.bind(this), 6000);
-    }.bind(this));
+    this.$timeout(function() {
+      // page content ready to display
+      this.loadIntroSequence = false;
+      this.loadImageSequence = true;
+    }.bind(this), 6000);
   }.bind(this));
 };
