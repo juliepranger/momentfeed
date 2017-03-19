@@ -1,4 +1,5 @@
 /* ngAnimate */
+.sentence-animate,
 .sequence.sequence-one {
   opacity: 1;
 
@@ -9,13 +10,16 @@
   @include prefix(transition, opacity 300ms ease-in-out 600ms);
 }
 
+.sentence-animate.ng-hide,
 .image-container.ng-hide,
 .sequence.ng-hide {
   opacity: 0;
 }
 
+.sentence-animate.ng-hide-add,
 .image-container.ng-hide-add,
 .sequence.ng-hide-add,
+.sentence-animate.ng-hide-remove,
 .image-container.ng-hide-remove,
 .sequence.ng-hide-remove {
   /* this needs to be here to make it visible during the animation

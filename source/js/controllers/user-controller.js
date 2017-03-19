@@ -36,6 +36,9 @@ mf.controllers.UserController =
   this.images;
   this.loadIntroSequence = false;
   this.loadImageSequence = false;
+  this.goOne = false;
+  this.goTwo = false;
+  this.goThree = false;
   this.initialize();
 };
 
