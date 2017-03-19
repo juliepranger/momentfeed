@@ -1,29 +1,25 @@
-.image-container.ng-enter,
-.image-container.ng-leave {
-  opacity: 0;
-  @include prefix(transition, all 1000ms ease-in-out);
-}
-
-.image-container.ng-enter {
-  opacity: 0;
-  @include prefix(transform, scale3d(0.98, 0.98, 0.98));
-}
-
-.image-container.ng-enter-stagger {
-  /* 200ms will be applied between each sucessive enter operation */
-  -webkit-transition-delay:0.5s;
-  transition-delay:0.5s;
-}
-
-.image-container.ng-enter-active {
+/* ngAnimate */
+.sequence.sequence-one {
   opacity: 1;
-  @include prefix(transform, scale3d(1, 1, 1));
+
+  @include prefix(transition, opacity 300ms ease-in-out 300ms);
 }
 
-.image-container.ng-leave{
+.sequence.sequence-two {
+  @include prefix(transition, opacity 300ms ease-in-out 600ms);
+}
+
+.image-container.ng-hide,
+.sequence.ng-hide {
   opacity: 0;
 }
 
-.image-container.ng-leave-active  {
-  opacity: 0;
+.image-container.ng-hide-add,
+.sequence.ng-hide-add,
+.image-container.ng-hide-remove,
+.sequence.ng-hide-remove {
+  /* this needs to be here to make it visible during the animation
+     since the .ng-hide class is already on the element rendering
+     it as hidden. */
+  display: block!important;
 }

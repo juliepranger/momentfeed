@@ -33,9 +33,9 @@ mf.controllers.UserController =
   this.API = API;
   this.clientID_ =  'dcd6712d07b04d0aa6e34c1a032dd89d';
   this.accessToken = null;
-  this.loading = true;
   this.images;
-
+  this.loadIntroSequence = false;
+  this.loadImageSequence = false;
   this.initialize();
 };
 
@@ -50,6 +50,7 @@ module.exports = mf.controllers.UserController;
  * Initialize the watchers
  */
 mf.controllers.UserController.prototype.initialize = function() {
+
   // watch the URL
   this.$scope.$watch(function(){
     return this.$location.url();
@@ -59,6 +60,10 @@ mf.controllers.UserController.prototype.initialize = function() {
       this.parseAccessToken(value);
     }
   }.bind(this));
+
+  this.$timeout(function() {
+    this.loadIntroSequence = true;
+  }.bind(this), 2000);
 };
 
 
@@ -96,8 +101,9 @@ mf.controllers.UserController.prototype.parseAccessToken = function(value) {
     this.Preloader.preloadImages( imageArray ).then(function(response) {
       this.$timeout(function() {
         // page content ready to display
-        this.loading = false;
-      }.bind(this), 1000);
+        this.loadIntroSequence = false;
+        this.loadImageSequence = true;
+      }.bind(this), 6000);
     }.bind(this));
   }.bind(this));
 };

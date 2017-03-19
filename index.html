@@ -25,13 +25,20 @@
         ng-click="UserController.getUser()"
         ng-show="UserController.accessToken === null">Sign in to Instagram
       </button>
-      <div class="row" >
+
+      <div class="row sequence sequence-one" ng-show="UserController.loadIntroSequence && !UserController.loadImageSequence">
+        <p class="text-center sentence-animate one">Thanks for allowing me play with some APIs this weekend.</p>
+        <p class="text-center sentence-animate two">I hope you get to know a little more about me.</p>
+        <p class="text-center sentence-animate three">*At least, what you can from the 20 images I'm allowed to pull in from Instagram.</p>
+      </div>
+
+      <div class="row sequence sequence-two" ng-show="!UserController.loadIntroSequence && UserController.loadImageSequence">
         <div class="col-xs-12 col-sm-6 col-md-3" ng-repeat="image in UserController.images">
           <img class="col-xs-12 col-sm-12 col-md-12 image-container"
             ng-src="{[image.images.standard_resolution.url]}"
             imagemodal
             ng-show="!UserController.loading"/>
-          <div class="col-xs-12 col-sm-12 col-md-12 image-container popup" ng-show="!UserController.loading">
+          <div class="col-xs-12 col-sm-12 col-md-12 image-container popup" ng-show="!UserController.loadIntroSequence && UserController.loadImageSequence">
             <p ng-show="!UserController.loading">{[image.caption.text]}</p>
           </div>
         </div>
