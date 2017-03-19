@@ -1,7 +1,20 @@
+body {
+  background-color: black;
+}
+
+h1 {
+  color: white;
+  margin: 40px auto;
+}
+
 .row {
 
+  .col-md-3 {
+    padding: 0 !important;
+  }
+
   .image-container {
-    margin: 15px 0;
+    margin: 0;
     padding: 0;
     position: relative;
     box-sizing: border-box;
@@ -11,12 +24,13 @@
     &.popup {
       margin: 0;
       height: 0;
-      bottom: 15px;
+      bottom: 0;
       position: absolute;
       background-color: #000;
       pointer-events: none;
       max-width: 345px;
       overflow: hidden;
+      opacity: 0.9;
       @include prefix(transition, height 250ms ease-in-out);
 
       p {

@@ -17,15 +17,19 @@ mf.controllers = mf.controllers || {};
  * @param {!angular.$scope} $scope module.
  * @param {!angular.$window} $window module.
  * @param {!angular.$location} $location module.
+ * @param {!angular.$timeout} $timeout module.
  * @param {mf.services.API} API service.
+ * @param {mf.services.Preloader} Preloader service.
  * @constructor
  * @ngInject
  **/
 mf.controllers.UserController =
-    function($scope, $window, $location, API) {
+    function($scope, $window, $location, $timeout, API, Preloader) {
   this.$scope = $scope;
   this.$window = $window;
   this.$location = $location;
+  this.$timeout = $timeout;
+  this.Preloader = Preloader;
   this.API = API;
   this.clientID_ =  'dcd6712d07b04d0aa6e34c1a032dd89d';
   this.accessToken = null;
@@ -81,7 +85,19 @@ mf.controllers.UserController.prototype.parseAccessToken = function(value) {
   // get the photos!
   this.API.getInstagramPhotos(this.accessToken).then(function(response) {
     this.images = response.data.data;
-    // page content ready to display
-    this.loading = false;
-  }.bind(this))
+    var imageArray = [];
+
+    for (var i = 0; i < this.images.length; i++) {
+      var image = this.images[i];
+      imageArray.push(image.images.standard_resolution.url);
+    }
+
+    // Preload the images; then, update display when returned.
+    this.Preloader.preloadImages( imageArray ).then(function(response) {
+      this.$timeout(function() {
+        // page content ready to display
+        this.loading = false;
+      }.bind(this), 1000);
+    }.bind(this));
+  }.bind(this));
 };

@@ -21,11 +21,8 @@ mf.directives = mf.directives || {};
 mf.directives.imagemodal = function() {
   return {
       restrict: 'A',
-      // templateUrl: '../partials/modal.html',
-      // transclude: false,
       link: function(scope, element, attrs) {
-        element.bind('click', function() {
-                    console.log(element);
+        element.bind('mouseover mouseout', function() {
           element.toggleClass('active');
         });
       }

@@ -23,6 +23,10 @@ angular.module('mf', [uiRouter, ngAnimate, ngSanitize])
     'PubSub',
     require('./services/pubsub-service')
   )
+  .service(
+    'Preloader',
+    require('./services/preloader-service')
+  )
   .config(require('./config'))
 
   .run(['$rootScope', '$state', '$stateParams', '$window', '$location', function($rootScope, $state, $stateParams, $window, $location) {
