@@ -1,0 +1,21 @@
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+///
+/// MIXINS
+///
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+@mixin prefix($property, $values) {
+  -webkit-#{$property}: #{$values};
+     -moz-#{$property}: #{$values};
+      -ms-#{$property}: #{$values};
+       -o-#{$property}: #{$values};
+          #{$property}: #{$values};
+}
+
+@mixin transition($transition...) {
+    -moz-transition:    $transition;
+    -o-transition:      $transition;
+    -webkit-transition: $transition;
+    transition:         $transition;
+}

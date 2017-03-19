@@ -1,0 +1,74 @@
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+///
+/// BODY OF THE APPLICATION
+///
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+body {
+  background: $black;
+}
+
+h1 {
+  color: $white;
+  margin: 40px auto;
+}
+
+.sentence-animate {
+  color: $white;
+  font-size: 21px;
+  line-height: 29px;
+
+  &.three {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+.row {
+
+  .col-md-3 {
+    padding: 0;
+  }
+
+  .image-container {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    box-sizing: border-box;
+    z-index: 2;
+    @include prefix(transition, all 250ms ease-in-out);
+
+    &.popup {
+      margin: 0;
+      height: 0;
+      bottom: 0;
+      position: absolute;
+      background-color: #000;
+      pointer-events: none;
+      overflow: hidden;
+      opacity: 0.9;
+      @include prefix(transition, height 250ms ease-in-out);
+
+      p {
+        color: $white;
+        padding: 15px;
+      }
+    }
+  }
+
+  .image-container.active {
+    & + .popup {
+      height: 100px;
+    }
+  }
+}
+
+/*
+  Allow angular.js to be loaded in body, hiding cloaked elements until
+  templates compile.  The !important is important given that there may be
+  other selectors that are more specific or come later and might alter display.
+ */
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
