@@ -14,6 +14,10 @@ h1 {
   margin: 40px auto;
 }
 
+.btn.btn-default {
+  @include prefix(transition, all 250ms ease-in-out);
+}
+
 .sentence-animate {
   color: $white;
   font-size: 21px;
